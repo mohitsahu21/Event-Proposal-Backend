@@ -114,6 +114,20 @@ router.delete("/deleteproposal",async (req,res) => {
 }
  });
 
+ 
+ router.post("/vendorproposals",async (req,res) => {
+    const {token} = req.body;
+    try{ 
+        const vendor = jwt.verify(token,"secret_key")
+        const vendorID = vendor._id;
+        console.log(vendorID)
+     const proposals = await proposalModel.find({vendorId: vendorID}).exec();
+     res.send(proposals);
+    }catch (err){
+      console.log(err)
+ }
+  });
+
 //  router.get("/vendordataandproposal",async (req,res) => {
    
 //     try{ 
@@ -132,7 +146,7 @@ router.delete("/deleteproposal",async (req,res) => {
         const vendor = jwt.verify(token,"secret_key")
         const vendoremail = vendor.email;
         registerModel.findOne({email: vendoremail}).then((data) => {
-
+        registerModel.find
             res.send({status :"ok", data :data });
         }).catch((error)=> {
             res.send({status :"error", data :error })
