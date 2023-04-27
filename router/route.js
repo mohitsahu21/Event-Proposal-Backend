@@ -256,12 +256,9 @@ router.post("/user/register",async (req,res)=>{
 
 
 router.put("/editproposal/:id",async (req,res)=>{
-    // const {id}=req.params.id;
     const updates=req.body;
-    console.log(updates)
     try{
         const updatedata=await proposalModel.findByIdAndUpdate(req.params.id,updates,{new:true})
-        console.log(updatedata)
         res.send({ status : "ok"});
     } catch(error)
     {
