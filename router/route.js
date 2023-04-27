@@ -126,6 +126,7 @@ router.delete("/deleteproposal",async (req,res) => {
 //  }
 //   });
 
+//non functioning
  router.post("/vendordataandproposal" , async (req,res) => {
     const {token} = req.body;
     try{
@@ -141,7 +142,7 @@ router.delete("/deleteproposal",async (req,res) => {
         res.send({ status : "error"});
     }
  })
- 
+ //non functioning
  router.post("/selectproposal" , async (req,res) => {
     const {id} = req.body;
     try{
@@ -159,7 +160,7 @@ router.delete("/deleteproposal",async (req,res) => {
             res.send({status :"error", data :error })
         }
     });
-
+//non functioning
     router.get("/getselectedproposals/:id",async (req,res) => {
         const data=await selectedModel.findById(req.params.id)
         console.log(data)
@@ -254,7 +255,19 @@ router.post("/user/register",async (req,res)=>{
 })
 
 
-
+router.put("/editproposal/:id",async (req,res)=>{
+    // const {id}=req.params.id;
+    const updates=req.body;
+    console.log(updates)
+    try{
+        const updatedata=await proposalModel.findByIdAndUpdate(req.params.id,updates,{new:true})
+        console.log(updatedata)
+        res.send({ status : "ok"});
+    } catch(error)
+    {
+        res.send({ status : "error"});
+    }
+});
 
 
 router.post("/user/login",async (req,res)=>{
@@ -284,7 +297,7 @@ router.get("/getproposal/:id",async (req,res)=>{
     // console.log(req.params.id)
     
     const data=await proposalModel.findById(req.params.id)
-    console.log(data)
+    // console.log(data)
     return res.json({proposal:data}) 
 
 })
