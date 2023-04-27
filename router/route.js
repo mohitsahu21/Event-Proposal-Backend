@@ -254,6 +254,18 @@ router.post("/user/register",async (req,res)=>{
     }
 })
 
+router.post("/vendorproposals",async (req,res) => {
+    const {token} = req.body;
+    try{
+        const vendor = jwt.verify(token,"secret_key")
+        const vendorID = vendor._id;
+        // console.log(vendorID)
+     const proposals = await proposalModel.find({vendorId: vendorID}).exec();
+     res.send(proposals);
+    }catch (err){
+      console.log(err)
+ }
+  });
 
 router.put("/editproposal/:id",async (req,res)=>{
     const updates=req.body;
