@@ -48,9 +48,8 @@ const proposalSchema = new mongoose.Schema({
         type: String
     },
     image: {
-        type: String
-        // data:Buffer,
-        // contentType: String
+        type: Array
+        
     }
 
 

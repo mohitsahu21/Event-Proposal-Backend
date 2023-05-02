@@ -24,42 +24,6 @@ const selectedModel = require('../Schema/userSchema/selectedSchema.js')
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage })
-
-
-
-// const ImageModel  = require('../Schema/imageSchema.js');
-
-// //storage 
-// const Storage  = multer.diskStorage({
-//     destination : "uploads",
-//     filename : (req,file,cb) => {
-//         cb(null,Date.now + file.originalname);
-//     },
-// })
-// const upload = multer({
-//     storage : Storage
-// }).single('testImage')
-
-// router.post('/upload',(req,res) => {
-//     upload(req,res,(err) => {
-//         if (err){
-//             console.log(err)
-//         }
-//         else{
-//             const newImage = new ImageModel({
-//                 name : req.body.name,
-//                 image:{
-//                     data:req.file.filename,
-//                     contentType : 'image/png'
-//                 }
-//             })
-//             newImage.save()
-//             .then(() => res.send('successfully uploaded')).catch( err=> console.log(err));
-//         }
-//     })
-// })
-      
-
 router.post("/createproposal",upload.single("image"),async (req,res) => {
     let {eventName, placeOfEvent,proposalType,eventType, budget,fromDate, toDate,foodPreference,description ,events,token,image} = req.body;
    
@@ -71,10 +35,6 @@ router.post("/createproposal",upload.single("image"),async (req,res) => {
     console.log(vendorEmail)
         let proposalData =  await new proposalModel({
             eventName, placeOfEvent,proposalType,eventType, budget,fromDate, toDate,foodPreference,description ,events,vendorEmail:vendorEmail,vendorId:vendorId,vendorName:vendorName,image
-            // : {
-            //     data: req.file.buffer,
-            //     contentType: req.file.mimetype,
-            // }
         });
         const data = await proposalData.save();
         res.send({ status : "ok"});
@@ -114,19 +74,6 @@ router.delete("/deleteproposal",async (req,res) => {
 }
  });
 
-//  router.get("/vendordataandproposal",async (req,res) => {
-   
-//     try{ 
-//      const vendordata = await registerModel.find();
-//      const proposaldata= await proposalModel.find();
-//      const payload=({vendordata:vendordata,proposaldata:proposaldata})
-//      res.send(payload);
-//     }catch (err){
-//       console.log(err)
-//  }
-//   });
-
-//non functioning
  router.post("/vendordataandproposal" , async (req,res) => {
     const {token} = req.body;
     try{
