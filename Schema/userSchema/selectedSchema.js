@@ -46,8 +46,8 @@ const selectedSchema = new mongoose.Schema({
     events: {
         type: String
     },
-    image: {
-        type: String
+    venueImage: {
+        type: Array
 
     }
 

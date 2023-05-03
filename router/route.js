@@ -89,14 +89,14 @@ router.delete("/deleteproposal",async (req,res) => {
         res.send({ status : "error"});
     }
  })
- //non functioning
+ 
  router.post("/selectproposal" , async (req,res) => {
     const {id} = req.body;
     try{
            const data = await proposalModel.findById(id)
               
            let selectedData =  await new selectedModel({
-            eventName : data.eventName, placeOfEvent : data.placeOfEvent,proposalType : data.proposalType,eventType : data.eventType, budget : data.budget,fromDate : data.fromDate, toDate : data.toDate,foodPreference : data.foodPreference,description : data.description ,events : data.events,vendorEmail:data.vendorEmail,vendorId: data.vendorId,vendorName: data.vendorName,image : data.image
+            eventName : data.eventName, placeOfEvent : data.placeOfEvent,proposalType : data.proposalType,eventType : data.eventType, budget : data.budget,fromDate : data.fromDate, toDate : data.toDate,foodPreference : data.foodPreference,description : data.description ,events : data.events,vendorEmail:data.vendorEmail,vendorId: data.vendorId,vendorName: data.vendorName,venueImage : data.venueImage
            
         });
        const data1  = await selectedData.save();
