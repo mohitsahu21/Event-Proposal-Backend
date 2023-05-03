@@ -34,7 +34,7 @@ router.post("/createproposal",upload.single("image"),async (req,res) => {
     const vendorName = vendor.name;
     console.log(vendorEmail)
         let proposalData =  await new proposalModel({
-            eventName, placeOfEvent,proposalType,eventType, budget,fromDate, toDate,foodPreference,description ,events,vendorEmail:vendorEmail,vendorId:vendorId,vendorName:vendorName,image : venueImage
+            eventName, placeOfEvent,proposalType,eventType, budget,fromDate, toDate,foodPreference,description ,events,vendorEmail:vendorEmail,vendorId:vendorId,vendorName:vendorName,venueImage : venueImage
         });
         const data = await proposalData.save();
         res.send({ status : "ok"});

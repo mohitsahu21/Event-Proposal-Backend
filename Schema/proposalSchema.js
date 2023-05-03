@@ -47,7 +47,7 @@ const proposalSchema = new mongoose.Schema({
     events: {
         type: String
     },
-    image: {
+   venueImage: {
         type: Array
         
     }
