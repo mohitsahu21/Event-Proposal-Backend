@@ -25,7 +25,7 @@ const selectedModel = require('../Schema/userSchema/selectedSchema.js')
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage })
 router.post("/createproposal",upload.single("image"),async (req,res) => {
-    let {eventName, placeOfEvent,proposalType,eventType, budget,fromDate, toDate,foodPreference,description ,events,token,image} = req.body;
+    let {eventName, placeOfEvent,proposalType,eventType, budget,fromDate, toDate,foodPreference,description ,events,token,venueImage} = req.body;
    
  try {
     const vendor = jwt.verify(token,"secret_key")
@@ -34,7 +34,7 @@ router.post("/createproposal",upload.single("image"),async (req,res) => {
     const vendorName = vendor.name;
     console.log(vendorEmail)
         let proposalData =  await new proposalModel({
-            eventName, placeOfEvent,proposalType,eventType, budget,fromDate, toDate,foodPreference,description ,events,vendorEmail:vendorEmail,vendorId:vendorId,vendorName:vendorName,image
+            eventName, placeOfEvent,proposalType,eventType, budget,fromDate, toDate,foodPreference,description ,events,vendorEmail:vendorEmail,vendorId:vendorId,vendorName:vendorName,image : venueImage
         });
         const data = await proposalData.save();
         res.send({ status : "ok"});
